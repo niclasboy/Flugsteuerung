@@ -6,7 +6,7 @@
 #include <avr/sleep.h>
 #include <avr/interrupt.h>
 #include <avr/io.h>
-#include "Servo/Servo.h"
+#include "Fulgstr/rx.h"
 
 
 
@@ -14,6 +14,7 @@ void setup() {
   Serial.begin(250000);
   Serial.println("Start");
   delay(50);  
+  initRx();
   sei();
 }
 
