@@ -1,4 +1,4 @@
-#define minServoAngle 45                    //Max Auslenkung
+#define minServoAngle 10                    //Max Auslenkung
 #define maxServoAngle (180 - minServoAngle) //Min Auslenkung
 
 #define Servo1BaseAngle 90                  //Basiswert für Servo 1
@@ -26,18 +26,18 @@
 
 //PWM Settings
 #define F_PWM 100                       // PWM-Frequenz in Hz
-#define PWM_STEPS 64                   // PWM-Schritte pro Zyklus(1..256)
-#define PWM_PORT PORTA                  // Port für PWM
-#define PWM_DDR DDRA                    // Datenrichtungsregister für PWM
+#define PWM_STEPS 64                   // PWM-Schritte pro Zyklus(1..64)
+#define PWM_PORT PORTC                  // Port für PWM
+#define PWM_DDR DDRC                    // Datenrichtungsregister für PWM
 //PWM Settings
 //Servo Settings
-#define Servo1 30
-#define Servo2 31
-#define Servo3 32
-#define Servo4 33
+#define Servo1 7
+#define Servo2 6
+#define Servo3 5
+#define Servo4 4
 //Servo Settings
 //Status LED
-#define statusR 11
-#define statusG 12
-#define statusB 13
+#define strobeLed 13
+#define posLight1 12
+#define posLight2 11
 //Status LED
