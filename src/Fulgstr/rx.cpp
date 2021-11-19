@@ -5,6 +5,7 @@ volatile byte buffer[25];
 volatile byte rawBuffer[25];
 volatile byte stateCounter = 0;
 volatile byte feedState = 0;
+uint8_t counter10msTick;
 bool failSafeActive = 1;
 
 void initRx()
@@ -28,7 +29,19 @@ void rxProcessing(void *pvParameters) // This is a task.
 
   for (;;) // A Task shall never return or exit.
   {
-    failSafeActive = buffer[23] & SBUS_FAILSAFE;
+    counter10msTick++;
+    uint8_t failSafeCondition1 = buffer[23] & SBUS_FAILSAFE;
+    uint8_t failSafeCondition2 = false;    
+    if(counter10msTick==100)
+    {
+      if(_goodFrames < 5)
+      {
+        failSafeCondition2 = true;
+      }
+      _goodFrames = 0;
+      counter10msTick = 0;
+    }
+    failSafeActive = failSafeCondition1 || failSafeCondition2;
     if (failSafeActive == SBUS_FAILSAFE_INACTIVE)
     {
       rxDataIn[0] = map(((buffer[1] | buffer[2] << 8) & 0x07FF), minIn, maxIn, minOut, maxOut);
@@ -48,10 +61,10 @@ void rxProcessing(void *pvParameters) // This is a task.
       rxDataIn[14] = map(((buffer[20] >> 2 | buffer[21] << 6) & 0x07FF), minIn, maxIn, minOut, maxOut);
       rxDataIn[15] = map(((buffer[21] >> 5 | buffer[22] << 3) & 0x07FF), minIn, maxIn, minOut, maxOut);
     }
-    Serial.println(failSafeActive);
-    _goodFrames = 0;
-    //((buffer[23])      & 0x0001) ? rxDataIn[16] = 255 : rxDataIn[16] = 0;
-    //((buffer[23] >> 1) & 0x0001) ? rxDataIn[17] = 255 : rxDataIn[17] = 0;
+    else
+    { //Failsave Condition
+
+    }
     applyChanges();
     vTaskDelay(10 / portTICK_PERIOD_MS); // wait for one second
   }
@@ -60,8 +73,7 @@ void rxProcessing(void *pvParameters) // This is a task.
 ISR(TIMER5_OVF_vect) //Wenn Timer ausgelößt wurde, wurde für 10ms nicht gesendet. Syncronisierung!
 {
   TCNT5 = 2786;
-  feedState = 0;
-  _goodFrames++;
+  feedState = 0;  
 }
 
 ISR(USART3_RX_vect)
@@ -89,7 +101,7 @@ ISR(USART3_RX_vect)
       feedState = 0;
       if (rawBuffer[24] == 0x00) //Packet OK
       {
-
+        _goodFrames++;
         //memcpy(buffer, rawBuffer, 25);
         for (int i = 0; i < 25; i++)
         {
