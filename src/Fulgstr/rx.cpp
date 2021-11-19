@@ -6,7 +6,9 @@ volatile byte rawBuffer[25];
 volatile byte stateCounter = 0;
 volatile byte feedState = 0;
 uint8_t counter10msTick;
-bool failSafeActive = 1;
+uint8_t failSafeCondition2 = true;  
+uint8_t failSafeCondition1 = true;
+long _goodFrames;
 
 void initRx()
 {
@@ -30,19 +32,22 @@ void rxProcessing(void *pvParameters) // This is a task.
   for (;;) // A Task shall never return or exit.
   {
     counter10msTick++;
-    uint8_t failSafeCondition1 = buffer[23] & SBUS_FAILSAFE;
-    uint8_t failSafeCondition2 = false;    
+    failSafeCondition1 = buffer[23] & SBUS_FAILSAFE;      
     if(counter10msTick==100)
     {
       if(_goodFrames < 5)
       {
         failSafeCondition2 = true;
       }
+      else
+      {
+        failSafeCondition2 = false;
+      }
       _goodFrames = 0;
       counter10msTick = 0;
     }
-    failSafeActive = failSafeCondition1 || failSafeCondition2;
-    if (failSafeActive == SBUS_FAILSAFE_INACTIVE)
+    failSafe = failSafeCondition1 || failSafeCondition2;
+    if (failSafe == SBUS_FAILSAFE_INACTIVE)
     {
       rxDataIn[0] = map(((buffer[1] | buffer[2] << 8) & 0x07FF), minIn, maxIn, minOut, maxOut);
       rxDataIn[1] = map(((buffer[2] >> 3 | buffer[3] << 5) & 0x07FF), minIn, maxIn, minOut, maxOut);
@@ -64,7 +69,7 @@ void rxProcessing(void *pvParameters) // This is a task.
     else
     { //Failsave Condition
 
-    }
+    }    
     applyChanges();
     vTaskDelay(10 / portTICK_PERIOD_MS); // wait for one second
   }
@@ -102,7 +107,6 @@ ISR(USART3_RX_vect)
       if (rawBuffer[24] == 0x00) //Packet OK
       {
         _goodFrames++;
-        //memcpy(buffer, rawBuffer, 25);
         for (int i = 0; i < 25; i++)
         {
           buffer[i] = rawBuffer[i];

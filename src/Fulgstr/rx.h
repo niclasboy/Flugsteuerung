@@ -21,7 +21,7 @@
 
 
 extern uint8_t rxDataIn[18]; 
-extern long _goodFrames;
+extern uint8_t failSafe;
 
 
 void initRx();

@@ -7,7 +7,7 @@
 #include <avr/interrupt.h>
 #include <avr/io.h>
 #include "Fulgstr/rx.h"
-
+#include "Fulgstr/blink.h"
 
 
 void setup() {
@@ -15,6 +15,7 @@ void setup() {
   Serial.println("Start");
   delay(50);  
   initRx();
+  initLEDs();
   sei();
 }
 

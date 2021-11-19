@@ -9,9 +9,12 @@
 #include <Arduino_FreeRTOS.h>
 
 extern uint8_t rxDataIn[18];  
+extern uint8_t failSafe;
 
 void initLEDs();
-void ledProc(void *pvParameters);
+void statusLED(void *pvParameters);
+void belLED(void *pvParameters);
+
 
 
 #endif

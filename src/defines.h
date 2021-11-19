@@ -22,7 +22,7 @@
 #define MaxRoll 50                          //Eingang kann Servo um 20° positiv Verändern
 
 #define Mode -1                             //Reserviert für Modi bsp. Pitch/Roll Stabilizer
-#define Lights -1                           //Reserviert Beleuchtung einschalten 
+#define Lights 4                           //Reserviert Beleuchtung einschalten 
 
 //PWM Settings
 #define F_PWM 100                       // PWM-Frequenz in Hz
@@ -37,7 +37,8 @@
 #define Servo4 4
 //Servo Settings
 //Status LED
-#define strobeLed 13
-#define posLight1 12
-#define posLight2 11
+#define statusLed 13
+#define strobeLed 12
+#define posLight1 11
+#define posLight2 10
 //Status LED
