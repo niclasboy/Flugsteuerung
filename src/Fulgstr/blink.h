@@ -9,7 +9,10 @@
 #include <Arduino_FreeRTOS.h>
 
 extern uint8_t rxDataIn[18];  
+extern volatile uint8_t pwm_setting[8]; 
 extern uint8_t failSafe;
+
+extern long debugCounter;
 
 void initLEDs();
 void statusLED(void *pvParameters);

@@ -8,6 +8,7 @@
 #include <avr/io.h>
 #include "Fulgstr/rx.h"
 #include "Fulgstr/blink.h"
+#include "Fulgstr/pwm.h"
 
 
 void setup() {
@@ -15,6 +16,7 @@ void setup() {
   Serial.println("Start");
   delay(50);  
   initRx();
+  initMotors();
   initLEDs();
   sei();
 }

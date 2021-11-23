@@ -26,7 +26,6 @@ void statusLED(void *pvParameters) // This is a task.
         digitalWrite(statusLed, HIGH);
         vTaskDelay(1000 / portTICK_PERIOD_MS); // wait for one second
     }
-    //Serial.println(rxDataIn[Lights]);
   }
 }
 

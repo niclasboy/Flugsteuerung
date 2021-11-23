@@ -29,6 +29,11 @@
 #define PWM_STEPS 64                   // PWM-Schritte pro Zyklus(1..64)
 #define PWM_PORT PORTC                  // Port für PWM
 #define PWM_DDR DDRC                    // Datenrichtungsregister für PWM
+
+#define MotorEnable1 22
+#define MotorEnable2 23
+#define MotorEnable3 24
+#define MotorEnable4 25
 //PWM Settings
 //Servo Settings
 #define Servo1 7
