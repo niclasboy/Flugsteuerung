@@ -58,22 +58,43 @@ void applyChanges(){//Called by RX in
         pwm_setting[0] = constrain(motorSpeed[0],0,64);
         pwm_setting[1] = 0;
     }
+    else
+    {
+        pwm_setting[1] = constrain(motorSpeed[0],0,64);
+        pwm_setting[0] = 0;
+    }
     if(motorSpeed[1] >= 0)
     {
         pwm_setting[2] = constrain(motorSpeed[1],0,64);
         pwm_setting[3] = 0;
+    }
+    else
+    {
+        pwm_setting[3] = constrain(motorSpeed[1],0,64);
+        pwm_setting[2] = 0;
     }
     if(motorSpeed[2] >= 0)
     {
         pwm_setting[4] = constrain(motorSpeed[2],0,64);
         pwm_setting[5] = 0;
     }
+    else
+    {
+        pwm_setting[5] = constrain(motorSpeed[2],0,64);
+        pwm_setting[4] = 0;
+    }
     if(motorSpeed[3] >= 0)
     {
         pwm_setting[6] = constrain(motorSpeed[3],0,64);
         pwm_setting[7] = 0;
     }
-    //Serial.println(rxDataIn[Direction]);
+    else
+    {
+        pwm_setting[7] = constrain(motorSpeed[3],0,64);
+        pwm_setting[6] = 0;
+    }
+    
+    
     
     servoAngle[0] = constrain(servoAngle[0],minServoAngle,maxServoAngle);
     servoAngle[1] = constrain(servoAngle[1],minServoAngle,maxServoAngle);
@@ -85,6 +106,23 @@ void applyChanges(){//Called by RX in
     mainServo[3].write(servoAngle[3]);
 
     #if DEBUG
+
+        Serial.print("Thro:   ");
+        Serial.print(speedIn);
+        Serial.print("  ");
+        Serial.print("Roll:   ");
+        Serial.print(roll);
+        Serial.print("  ");
+        Serial.print("Elev:   ");
+        Serial.print(pitch);
+        Serial.print("  ");
+        Serial.print("YAW:   ");
+        Serial.print(yaw);
+        Serial.print("  ");
+        Serial.print("VTOL:   ");
+        Serial.print(vtolAngle);
+        Serial.print("  ");
+
         Serial.print("Servos:   ");
         Serial.print(servoAngle[0]);
         Serial.print("  ");

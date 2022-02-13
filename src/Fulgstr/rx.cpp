@@ -22,7 +22,7 @@ void initRx()
   TIMSK5 = (1 << TOIE5);
 
   initServos();
-  xTaskCreate(rxProcessing, "RX", 128, NULL, 0, NULL); //Bearbeitung des Ringbuffers, wenn neu Daten anliegen
+  xTaskCreate(rxProcessing, "RX", 164, NULL, 0, NULL); //Bearbeitung des Ringbuffers, wenn neu Daten anliegen
 }
 
 void rxProcessing(void *pvParameters) // This is a task.
@@ -68,7 +68,10 @@ void rxProcessing(void *pvParameters) // This is a task.
     }
     else
     { //Failsave Condition
-
+      rxDataIn[ThrottleChannel] = 0;
+      rxDataIn[RollChannel] = 128;
+      rxDataIn[YawChannel] = 128;
+      rxDataIn[PitchChannel] = 128;
     }    
     applyChanges();
     vTaskDelay(10 / portTICK_PERIOD_MS); // wait for one second
