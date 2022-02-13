@@ -1,15 +1,28 @@
-#define minServoAngle 10                    //Max Auslenkung
-#define maxServoAngle (180 - minServoAngle) //Min Auslenkung
+#define minServoAngle 0                    //Max Auslenkung
+#define maxServoAngle 180                  //Min Auslenkung
 
-#define Servo1BaseAngle 90                  //Basiswert für Servo 1
-#define Servo2BaseAngle 90                  //Basiswert für Servo 2
-#define Servo3BaseAngle 90                  //Basiswert für Servo 3
-#define Servo4BaseAngle 90                  //Basiswert für Servo 4
+#define Servo1BaseAngle 90                 //Basiswert für Servo 1
+#define Servo2BaseAngle 90                 //Basiswert für Servo 2
+#define Servo3BaseAngle 90                 //Basiswert für Servo 3
+#define Servo4BaseAngle 90                 //Basiswert für Servo 4
+
+#define Servo1BaseAngleVTOL 0              //Basiswert für Servo 1
+#define Servo2BaseAngleVTOL 0              //Basiswert für Servo 2
+#define Servo3BaseAngleVTOL 0              //Basiswert für Servo 3
+#define Servo4BaseAngleVTOL 0              //Basiswert für Servo 4
+
+#define MaxVTOLAngle 90                    //Max VTOL Change Angle
 
 #define ThrottleChannel 0                   //Throttel Kanal
 #define PitchChannel 2                      //Pitch Kanal
 #define YawChannel 3                        //Yaw Kanal
 #define RollChannel 1                       //Roll Kanal
+
+#define Mode 6                            //Reserviert für Modi bsp. Pitch/Roll Stabilizer
+#define AngleVTOL 7
+#define Lights 4                           //Reserviert Beleuchtung einschalten 
+#define Direction 5
+
 
 #define MinPitch -50                        //Eingang kann Servo um 20° negativ Verändern
 #define MaxPitch 50                         //Eingang kann Servo um 20° positiv Verändern
@@ -21,9 +34,7 @@
 #define MinRoll -50                         //Eingang kann Servo um 20° negativ Verändern
 #define MaxRoll 50                          //Eingang kann Servo um 20° positiv Verändern
 
-#define Mode -1                             //Reserviert für Modi bsp. Pitch/Roll Stabilizer
-#define Lights 4                           //Reserviert Beleuchtung einschalten 
-#define Direction 5
+
 
 //PWM Settings
 #define F_PWM 100                       // PWM-Frequenz in Hz
@@ -46,3 +57,6 @@
 #define posLight1 9
 #define posLight2 8
 //Status LED
+
+
+#define DEBUG true
