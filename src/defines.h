@@ -14,7 +14,7 @@
 #define MinPitch -50                        //Eingang kann Servo um 20° negativ Verändern
 #define MaxPitch 50                         //Eingang kann Servo um 20° positiv Verändern
 
-#define HeadroomYaw 14                      //Motorleistung Begrenezen um Headroom beim Yawen zu haben
+#define HeadroomYaw 0                      //Motorleistung Begrenezen um Headroom beim Yawen zu haben
 #define MinYaw -20                          //Abnahme der PWM Leistung um 20 "Stufen" von 64. 
 #define MaxYaw 20                           //Zunahme der PWM Leistung um 20 "Stufen" von 64. 
 
@@ -23,17 +23,16 @@
 
 #define Mode -1                             //Reserviert für Modi bsp. Pitch/Roll Stabilizer
 #define Lights 4                           //Reserviert Beleuchtung einschalten 
+#define Direction 5
 
 //PWM Settings
 #define F_PWM 100                       // PWM-Frequenz in Hz
 #define PWM_STEPS 64                   // PWM-Schritte pro Zyklus(1..64)
-#define PWM_PORT PORTC                  // Port für PWM
-#define PWM_DDR DDRC                    // Datenrichtungsregister für PWM
+#define PWM_PORT PORTA                  // Port für PWM
+#define PWM_DDR DDRA                    // Datenrichtungsregister für PWM
+#define PWM_PORT2 PORTL                  // Port für PWM
+#define PWM_DDR2 DDRL                    // Datenrichtungsregister für PWM
 
-#define MotorEnable1 22
-#define MotorEnable2 23
-#define MotorEnable3 24
-#define MotorEnable4 25
 //PWM Settings
 //Servo Settings
 #define Servo1 7
@@ -43,7 +42,7 @@
 //Servo Settings
 //Status LED
 #define statusLed 13
-#define strobeLed 12
-#define posLight1 11
-#define posLight2 10
+#define strobeLed 11
+#define posLight1 9
+#define posLight2 8
 //Status LED
