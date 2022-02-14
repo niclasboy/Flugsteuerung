@@ -107,23 +107,18 @@ void applyChanges(){//Called by RX in
 
     #if DEBUG
 
-        Serial.print("Thro:   ");
+        Serial.print("   Thro:   ");
         Serial.print(speedIn);
-        Serial.print("  ");
-        Serial.print("Roll:   ");
+        Serial.print("   Roll:   ");
         Serial.print(roll);
-        Serial.print("  ");
-        Serial.print("Elev:   ");
+        Serial.print("   Elev:   ");
         Serial.print(pitch);
-        Serial.print("  ");
-        Serial.print("YAW:   ");
+        Serial.print("   YAW:   ");
         Serial.print(yaw);
-        Serial.print("  ");
-        Serial.print("VTOL:   ");
+        Serial.print("   VTOL:   ");
         Serial.print(vtolAngle);
-        Serial.print("  ");
 
-        Serial.print("Servos:   ");
+        Serial.print("   Servos:   ");
         Serial.print(servoAngle[0]);
         Serial.print("  ");
         Serial.print(servoAngle[1]);

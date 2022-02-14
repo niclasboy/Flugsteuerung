@@ -9,6 +9,7 @@ uint8_t counter10msTick;
 uint8_t failSafeCondition2 = true;  
 uint8_t failSafeCondition1 = true;
 long _goodFrames;
+long debug;
 
 void initRx()
 {
@@ -17,8 +18,10 @@ void initRx()
   UCSR3B |= (1 << RXCIE3) | (1 << RXEN3);
   UCSR3C |= (1 << UPM31) | (1 << USBS3) | (1 << UCSZ31) | (1 << UCSZ30);
 
-  TCNT5 = 2786;
-  TCCR5B = (1 << CS52);
+  TCNT5 = 65464;
+  TCCR5A = 0;
+  TCCR5B = (1<<CS52) | (1<<CS50);
+  TCCR5C = 0;
   TIMSK5 = (1 << TOIE5);
 
   initServos();
@@ -80,8 +83,9 @@ void rxProcessing(void *pvParameters) // This is a task.
 
 ISR(TIMER5_OVF_vect) //Wenn Timer ausgelößt wurde, wurde für 10ms nicht gesendet. Syncronisierung!
 {
-  TCNT5 = 2786;
+  TCNT5 = 65464;
   feedState = 0;  
+  debug++;
 }
 
 ISR(USART3_RX_vect)
